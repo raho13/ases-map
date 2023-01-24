@@ -7,17 +7,8 @@ import Locations from "./layouts/main/pages/Locations";
 
 export const routes = [
   {
-    path: "/",
+    path: "/*",
     element: <Layout />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  }
-
 ];
 

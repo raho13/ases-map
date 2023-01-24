@@ -18,15 +18,12 @@ const items = [
     getItem('Settings'),
 ];
 const NavMenu = () => {
-    const navigate = useNavigate();
     return (
         <Menu
-            onClick={(e) => {
-                console.log(e.key)
-            }}
             style={{
-                width: 256,
+                maxWidth: "100%",
             }}
+            // theme="dark"
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline"
