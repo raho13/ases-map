@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Modal, Input, Space } from "antd";
 import { MyTable2 } from "../../../components/Table2";
-import AddRegion from "./AddRegion";
+import AddStage from "./AddStage";
 import moment from 'moment'
 const unique = "bad_types.all";
 import { AiFillEdit } from 'react-icons/ai'
 const limit_ls_name = unique + "2.limit";
-export function Regions() {
+export function Stages() {
     const [props, setProps] = React.useState({ ready: false, dataSource: [], total: 0 })
     const [query, setQuery] = React.useState({});
     const [sort, setSort] = React.useState({ createdAt: -1 })
@@ -63,7 +63,7 @@ export function Regions() {
 
     function onAnyChange(whatChanged, { new_query = query, new_limit = limit, new_skip = skip, new_sort = sort }) {
         setProps({ ...props, ready: false })
-        Meteor.call("get_regions", new_query, new_limit, new_skip, new_sort, function (err, res) {
+        Meteor.call("get_stages", new_query, new_limit, new_skip, new_sort, function (err, res) {
             if (res) {
                 res.ready = true
                 setProps(res)
@@ -97,7 +97,7 @@ export function Regions() {
     }, [])
 
     const editRegion = () => {
-        Meteor.call("update_region", inputValue._id, inputValue, (err, res) => {
+        Meteor.call("update_stage", inputValue._id, inputValue, (err, res) => {
             if (res) {
                 setmodalIsopen(false)
                 onAnyChange("ok", {})
@@ -111,7 +111,7 @@ export function Regions() {
         <>
 
             <div className="w-full" >
-                <AddRegion onAnyChange={onAnyChange} />
+                <AddStage onAnyChange={onAnyChange} />
                 <MyTable2
                     {...props}
                     columns={columns}
@@ -136,7 +136,7 @@ export function Regions() {
                     onCancel={() => {
                         setmodalIsopen(false)
                     }}>
-                    <Input placeholder="Region adı" onChange={(e) => {
+                    <Input placeholder="Bölgə adı" onChange={(e) => {
                         setinputValue({ ...inputValue, data: e.target.value })
                     }}
                         value={inputValue.data}

@@ -1,10 +1,10 @@
 import React from 'react'
 import Locations from './pages/locations/Locations'
-import  Settings  from './pages/settings/Settings';
+import  {Settings}  from './pages/settings/Settings';
 
 export default function MainRouter({ path }) {
     switch (path) {
-        case "/":
+        case "/locations":
             return <Locations />
             break;
         case "/settings":

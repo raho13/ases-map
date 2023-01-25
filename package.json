@@ -12,6 +12,7 @@
     "antd": "^5.1.6",
     "leaflet": "^1.9.3",
     "meteor-node-stubs": "^1.2.5",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^4.7.1",

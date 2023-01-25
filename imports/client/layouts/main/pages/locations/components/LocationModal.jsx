@@ -1,7 +1,39 @@
-import { Button, Modal, Input, Row, Col, Select, Space } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Modal, Input, Row, Col, Select } from 'antd';
+import React, { useEffect } from 'react';
+
+
 
 const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationData, isModalOpen }) => {
+    const [query, setQuery] = React.useState({});
+    const [sort, setSort] = React.useState({ createdAt: -1 })
+    const [limit, setLimit] = React.useState(0);
+    const [skip, setSkip] = React.useState(0);
+    const [regions, setregions] = React.useState([])
+    const [stages, setstages] = React.useState([])
+    const [cities, setcities] = React.useState([])
+    useEffect(() => {
+        Meteor.call("get_regions", query, limit, skip, sort, function (err, res) {
+            if (res) {
+                setregions(res.dataSource)
+            } else {
+                console.log(err)
+            }
+        })
+        Meteor.call("get_stages", query, limit, skip, sort, function (err, res) {
+            if (res) {
+                setstages(res.dataSource)
+            } else {
+                console.log(err)
+            }
+        })
+        Meteor.call("get_cities", query, limit, skip, sort, function (err, res) {
+            if (res) {
+                setcities(res.dataSource)
+            } else {
+                console.log(err)
+            }
+        })
+    }, [])
     const handleOk = () => {
         if (LocationData._id) {
             //Update
@@ -69,8 +101,8 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         value={LocationData.country === "" ? 'Ölkə' : LocationData.country}
                     >
 
-                        <Option value="Azərbaycan" >Azərbaycan</Option>
-                        <Option value="Gürcüstan" >Gürcüstan</Option>
+                        <Select.Option value="Azərbaycan" >Azərbaycan</Select.Option>
+                        <Select.Option value="Gürcüstan" >Gürcüstan</Select.Option>
                     </Select>
                 </Col>
                 <Col span={6}>
@@ -86,8 +118,10 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
 
 
                     >
-                        <Option value="Option1">Option1</Option>
-                        <Option value="Option2">Option2</Option>
+                        {cities.map((city) => {
+                            return <Select.Option key={city._id} value={city.data}>{city.data}</Select.Option>
+                        })}
+
                     </Select>
                 </Col>
                 <Col span={6}>
@@ -100,8 +134,9 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         }}
                         value={LocationData.stage === "" ? 'Bölgə' : LocationData.stage} >
 
-                        <Option value="Option1">Option1</Option>
-                        <Option value="Option2">Option2</Option>
+                        {stages.map((stage) => {
+                            return <Select.Option key={stage._id} value={stage.data}>{stage.data}</Select.Option>
+                        })}
                     </Select>
                 </Col>
                 <Col span={6}>
@@ -115,8 +150,9 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
 
                         value={LocationData.region === "" ? 'Region' : LocationData.region}
                     >
-                        <Select.Option value="Option1">Option1</Select.Option>
-                        <Select.Option value="Option2">Option2</Select.Option>
+                        {regions.map((region) => {
+                            return <Select.Option key={region._id} value={region.data}>{region.data}</Select.Option>
+                        })}
                     </Select>
                 </Col>
             </Row>

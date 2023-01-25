@@ -1,7 +1,6 @@
 import { Menu } from 'antd';
-import { useNavigate } from "react-router-dom";
 import React from 'react'
-
+import { useNavigate } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -12,12 +11,14 @@ function getItem(label, key, icon, children, type) {
         type,
     };
 }
+
 const items = [
-    getItem('Ünvanlar', 'lll'),
-    getItem('İstifadəçilər'),
-    getItem('Settings'),
+    getItem('Ünvanlar', 'locations'),
+    getItem('İstifadəçilər', 'users'),
+    getItem('Settings', 'settings'),
 ];
 const NavMenu = () => {
+    const navigate = useNavigate()
     return (
         <Menu
             style={{
@@ -28,6 +29,9 @@ const NavMenu = () => {
             defaultOpenKeys={['sub1']}
             mode="inline"
             items={items}
+            onClick={(e) => {
+                navigate(`/${e.key}`);
+            }}
         />
     );
 };

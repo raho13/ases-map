@@ -1,40 +1,46 @@
-// import { Menu, Table } from "antd"
-// import React from "react"
-// ///import { BadTypes } from "./components/BadTypes"
+import { Menu, Table, Row, Col } from "antd"
+import React from "react"
+import { Regions } from "./components/Regions"
+import { Stages } from "./components/Stages"
+import { Cities } from "./components/Cities"
+const MenuComonents = {
+    Regions, Stages, Cities
+}
+export function Settings() {
+    const [choosen_item, setChoosenItem] = React.useState("Regions")
+    const MenuItem = MenuComonents[choosen_item]
+    return <div className="flex flex-row">
+        <Row>
+            <Col span={4}>
+                <Menu
+                    onClick={(e) => {
+                        setChoosenItem(e.key)
+                    }}
+                    defaultSelectedKeys={[choosen_item]}
+                    className="w-full"
+                    mode="inline"
+                    items={[
+                        {
+                            key: "Regions",
+                            label: "Regionlar",
+                        },
+                        {
+                            key: "Stages",
+                            label: "Bölgələr",
+                        },
+                        {
+                            key: "Cities",
+                            label: "Şəhərlər",
+                        },
 
-// // const MenuComonents = {
-// //     BadTypes
-// // }
-// export function Settings() {
-//     const [choosen_item, setChoosenItem] = React.useState("BadTypes")
-//     const MenuItem = MenuComonents[choosen_item]
-//     return <div className="flex flex-row">
-//         <div className="flex w-1/5 p-2">
-//             <Menu
-//                 onClick={(e) => {
-//                     setChoosenItem(e.key)
-//                 }}
-//                 defaultSelectedKeys={[choosen_item]}
-//                 className="w-full"
-//                 mode="inline"
-//                 items={[
-//                     {
-//                         key: "BadTypes",
-//                         label: "Şikayət tipləri",
-//                     },
+                    ]}
+                />
 
-//                 ]}
-//             />
-//         </div>
-//         <div className="flex w-4/5 p-2">
-//             <MenuItem />
-//         </div>
-//     </div>
-// }
-import React from 'react'
+            </Col>
+            <Col span={20}>
+                <MenuItem />
+            </Col>
 
-export default function Settings() {
-  return (
-    <div>Settings</div>
-  )
+        </Row >
+    </div>
 }

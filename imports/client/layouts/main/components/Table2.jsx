@@ -25,23 +25,24 @@ export const MyTable2 = React.memo(({ unique, limit, skip, dataSource, onSkipCha
     ></Loading>
   );
 }, (prev, next) => {
-  const limit = prev.limit === next.limit
-  const skip = prev.skip === next.skip
-  const unique = prev.unique === next.unique
-  const sort = JSON.stringify(prev.sort) === JSON.stringify(next.sort)
-  const query = JSON.stringify(prev.query) === JSON.stringify(next.query)
-  const length = prev.dataSource.length === next.dataSource.length
-  const readyChanged = prev.ready === next.ready
-  const firstItemChange = prev.dataSource?.[0]?._id === next.dataSource?.[0]?._id
-  if (!readyChanged) console.log("readyChanged deyisdi")
-  if (!firstItemChange) console.log("firstItemChange deyisdi")
-  if (!length) console.log("length deyisdi")
-  if (!limit) console.log("limit deyisdi")
-  if (!skip) console.log("skip deyisdi")
-  if (!unique) console.log("unique deyisdi")
-  if (!sort) console.log("sort deyisdi")
-  if (!query) console.log("query deyisdi")
-  return limit && skip && unique && sort && query
+  return false
+  // const limit = prev.limit === next.limit
+  // const skip = prev.skip === next.skip
+  // const unique = prev.unique === next.unique
+  // const sort = JSON.stringify(prev.sort) === JSON.stringify(next.sort)
+  // const query = JSON.stringify(prev.query) === JSON.stringify(next.query)
+  // const length = prev.dataSource.length === next.dataSource.length
+  // const readyChanged = prev.ready === next.ready
+  // const firstItemChange = prev.dataSource?.[0]?._id === next.dataSource?.[0]?._id
+  // if (!readyChanged) console.log("readyChanged deyisdi")
+  // if (!firstItemChange) console.log("firstItemChange deyisdi")
+  // if (!length) console.log("length deyisdi")
+  // if (!limit) console.log("limit deyisdi")
+  // if (!skip) console.log("skip deyisdi")
+  // if (!unique) console.log("unique deyisdi")
+  // if (!sort) console.log("sort deyisdi")
+  // if (!query) console.log("query deyisdi")
+  // return limit && skip && unique && sort && query
 });
 const TheTable = ({
   total,
@@ -60,13 +61,14 @@ const TheTable = ({
   return (
 
     <Table
+      rowKey="_id"
       size="small"
       scroll={{
         y,
       }}
       pagination={{
         pageSize: limit,
-        position: ["none", "bottomRight"],
+        position: ["none", "bottomCenter"],
         showSizeChanger: true,
         total: total,
         onShowSizeChange: (e, newSize) => {
