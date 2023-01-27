@@ -67,30 +67,34 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                     <Input placeholder="Tam ünvan adı" onChange={(e) => {
                         setLocationData({ ...LocationData, name: e.target.value })
                     }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.name} />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Qısa ünvan adı" onChange={(e) => {
                         setLocationData({ ...LocationData, shortname: e.target.value })
-                    }}
+                    }} style={{ border: "1px solid black" }}
                         value={LocationData.shortname} />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Lat" onChange={(e) => {
                         setLocationData({ ...LocationData, lat: e.target.value })
                     }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.lat} type="number" />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Long" onChange={(e) => {
                         setLocationData({ ...LocationData, long: e.target.value })
                     }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.long} type="number" />
                 </Col>
             </Row>
-            <Row gutter={24} style={{ marginTop: '20px' }}>
-                <Col span={6}>
+            <Row gutter={24} style={{ marginTop: '20px', }}>
+                <Col span={6} >
                     <Select
+                        defaultValue={"Azərbaycan"}
                         onChange={(e) => {
                             setLocationData({ ...LocationData, country: e })
                         }}
@@ -98,7 +102,8 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         style={{
                             width: '100%',
                         }}
-                        value={LocationData.country === "" ? 'Ölkə' : LocationData.country}
+
+                        value={LocationData.country === "" ? 'Azərbaycan' : LocationData.country}
                     >
 
                         <Select.Option value="Azərbaycan" >Azərbaycan</Select.Option>
@@ -115,8 +120,6 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                             width: '100%',
                         }}
                         value={LocationData.city === "" ? 'Şəhər' : LocationData.city}
-
-
                     >
                         {cities.map((city) => {
                             return <Select.Option key={city._id} value={city.data}>{city.data}</Select.Option>
@@ -161,21 +164,24 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                     <Input placeholder="Küçə/prospekt" onChange={(e) => {
                         setLocationData({ ...LocationData, street: e.target.value })
                     }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.street} />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Nömrə" type='number' onChange={(e) => {
                         setLocationData({ ...LocationData, number: e.target.value })
                     }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.number} />
                 </Col>
                 <Col span={6}>
-                    <Input placeholder="İd" disabled value={LocationData._id} />
+                    <Input placeholder="İd" disabled value={LocationData._id} style={{ border: "1px solid black" }} />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Məhşur adı" onChange={(e) => {
                         setLocationData({ ...LocationData, famous_name: e.target.value })
                     }}
+                    style={{ border: "1px solid black" }}
                         value={LocationData.famous_name} />
                 </Col>
             </Row>

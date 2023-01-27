@@ -5,5 +5,13 @@ body {
 
 .leaflet-container {
   width: 500px;
-  height:300px;
+  height: 300px;
+}
+
+.ant-select-selector {
+  border: 1px solid black !important;
+}
+
+.ant-table-cell {
+  border-bottom: 1px solid rgb(158, 158, 158) !important;
 }

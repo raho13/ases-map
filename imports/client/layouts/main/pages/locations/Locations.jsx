@@ -37,7 +37,7 @@ export default function Locations() {
         const result = {}
         result.ready = Meteor.subscribe('get_locations', query, limit, skip, sort).ready()
         result.locations = LocationsCollection.find(
-            query,
+            query, { sort }
         ).fetch()
         return result;
     }, [limit, skip, query, sort])

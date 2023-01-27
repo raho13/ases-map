@@ -6,6 +6,9 @@ import moment from 'moment'
 const unique = "bad_types.all";
 import { AiFillEdit } from 'react-icons/ai'
 const limit_ls_name = unique + "2.limit";
+
+
+
 export function Cities() {
     const [props, setProps] = React.useState({ ready: false, dataSource: [], total: 0 })
     const [query, setQuery] = React.useState({});
@@ -15,6 +18,7 @@ export function Cities() {
     );
     const [modalIsopen, setmodalIsopen] = React.useState(false)
     const [inputValue, setinputValue] = React.useState({})
+    const [skip, setSkip] = React.useState(0);
     const columns = [
         {
             title: '#',
@@ -59,7 +63,7 @@ export function Cities() {
             )
         }
     ]
-    const [skip, setSkip] = React.useState(0);
+   
 
     function onAnyChange(whatChanged, { new_query = query, new_limit = limit, new_skip = skip, new_sort = sort }) {
         setProps({ ...props, ready: false })

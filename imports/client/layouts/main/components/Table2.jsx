@@ -90,6 +90,7 @@ const TheTable = ({
       }}
       dataSource={dataSource}
     >
+   
       {columns.map(column => {
         return <Column title={column.title} dataIndex={column.dataIndex} key={column.key} fixed={column.fixed} width={column.width} render={column.render} />
       })}

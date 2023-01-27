@@ -1,20 +1,20 @@
 import { Row, Col } from 'antd';
 import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
-import MainRouter from './MainRouter';
+import { Header } from './components/Header';
 
 
 export default function Layout() {
-  let location = useLocation();
   return (
     <>
+      <Header />
       <Row>
         <Col span={3}>
           <NavMenu />
         </Col >
         <Col span={21}>
-          <MainRouter path={location.pathname} />
+          <Outlet></Outlet>
         </Col >
       </Row>
     </>
