@@ -57,7 +57,7 @@ export default function LocationsTable({
             )
         },
         {
-            title: 'Edit',
+            title: 'Düzəlt',
             dataIndex: 'address',
             key: 'address',
             render: (text, record, index) => (
@@ -81,6 +81,7 @@ export default function LocationsTable({
             pagination={{
                 pageSize: limit,
                 showSizeChanger: true,
+                position: ["none", "bottomCenter"],
                 total: total,
                 onShowSizeChange: (e, newSize) => {
                     onLimitChange(newSize)

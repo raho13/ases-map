@@ -28,7 +28,7 @@ const NavMenu = () => {
             return items = [
                 getItem('Ünvanlar', 'locations'),
                 getItem('İstifadəçilər', 'users'),
-                getItem('Settings', 'settings'),
+                getItem('Tənzimləmələr', 'settings'),
             ];
         } else {
             return items = [

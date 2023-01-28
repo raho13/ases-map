@@ -12,7 +12,7 @@ export default function Locations() {
     const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
     const [limit, setLimit] = useState(10)
     const [skip, setSkip] = useState(0)
-    const [query, setQuery] = useState({ status: true })
+    const [query, setQuery] = useState({ })
     const [sort, setSort] = useState({ createdAt: -1 })
     const [total, setTotal] = useState(0)
     const [LocationData, setLocationData] = useState({
@@ -48,7 +48,6 @@ export default function Locations() {
                 setTotal(res)
             }
             else if (err) {
-                console.log(err)
             }
         })
     }, [query, data.locations.length])
@@ -77,7 +76,12 @@ export default function Locations() {
         setSkip(skip)
     }
     function onQueryChange(new_query) {
-        setQuery({ ...query, ...new_query })
+        if (new_query.status === undefined) {
+            setQuery({ name: new_query.name })
+        } else {
+            setQuery({ ...query, ...new_query })
+        }
+
     }
     function ModalVisible(record, index) {
         if (index === 1) {

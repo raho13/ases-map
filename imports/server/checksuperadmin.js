@@ -1,10 +1,4 @@
 Meteor.startup(function () {
-
-    //Meteor.userId()
-    //Meteor.user()
-    //yaradacigim userin icind olamilidir 
-    // username
-    // psw
     const IsalreadyExsist = Meteor.users.findOne({ "profile.role": 1 })
     if (!IsalreadyExsist) {
         Accounts.createUser({
@@ -13,7 +7,3 @@ Meteor.startup(function () {
     }
 }
 )
-
-
-//Meteor.users
-//users collection

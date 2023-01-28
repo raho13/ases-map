@@ -8,6 +8,7 @@ export default function Header({ showModal, query, onQueryChange }) {
             const status_to_boolean = {
                 "aktiv": true,
                 "deaktiv": false,
+                "Hamısı": "all"
             }
             values.search = new RegExp(values.search)
             values.status = status_to_boolean[values.status]
@@ -16,7 +17,7 @@ export default function Header({ showModal, query, onQueryChange }) {
             onQueryChange(query)
         }}
             initialValues={{
-                status: query.status === true ? "aktiv" : "deaktiv"
+                status: query.status === true ? "aktiv" : (query.status === false ? "deaktiv" : "all")
             }}>
             <Row >
                 <Col span={12}>
@@ -40,8 +41,9 @@ export default function Header({ showModal, query, onQueryChange }) {
                                         marginRight: 15
                                     }}
                                         size={'large'}>
-                                        <Select.Option value="aktiv">Aktiv</Select.Option>
+                                        <Select.Option value="all">Hamısı</Select.Option>
                                         <Select.Option value="deaktiv">Deaktiv</Select.Option>
+                                        <Select.Option value="aktiv">Aktiv</Select.Option>
                                     </Select>
                                 </Form.Item>
                             </Space>

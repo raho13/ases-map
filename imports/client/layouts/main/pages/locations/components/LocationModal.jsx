@@ -181,7 +181,7 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                     <Input placeholder="Məhşur adı" onChange={(e) => {
                         setLocationData({ ...LocationData, famous_name: e.target.value })
                     }}
-                    style={{ border: "1px solid black" }}
+                        style={{ border: "1px solid black" }}
                         value={LocationData.famous_name} />
                 </Col>
             </Row>
