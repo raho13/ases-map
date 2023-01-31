@@ -6,6 +6,7 @@ import Locations from "./layouts/main/pages/locations/Locations";
 import { Settings } from "./layouts/main/pages/settings/Settings";
 import Users from "./layouts/main/pages/users/Users";
 import { useTracker } from "meteor/react-meteor-data"
+import ProtectedRoutse from './ProtectedRoutse'
 import { Spin } from "antd";
 function Init() {
   const navigate = useNavigate()
@@ -49,15 +50,15 @@ export const routes = [
         children: [
           {
             path: "locations",
-            element: <Locations />,
+            element:  <Locations />,
           },
           {
             path: "settings",
-            element: <Settings />,
+            element: <ProtectedRoutse><Settings /></ProtectedRoutse>,
           },
           {
             path: "users",
-            element: <Users />,
+            element:<ProtectedRoutse><Users /></ProtectedRoutse>,
           },
         ],
       },

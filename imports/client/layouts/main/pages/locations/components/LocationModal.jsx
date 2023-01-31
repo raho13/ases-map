@@ -78,17 +78,22 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Lat" onChange={(e) => {
-                        setLocationData({ ...LocationData, lat: e.target.value })
+                        if (Number(e.target.value) || e.target.value === '') {
+                            setLocationData({ ...LocationData, lat: e.target.value })
+                        }
+
                     }}
                         style={{ border: "1px solid black" }}
-                        value={LocationData.lat} type="number" />
+                        value={LocationData.lat} />
                 </Col>
                 <Col span={6}>
                     <Input placeholder="Long" onChange={(e) => {
-                        setLocationData({ ...LocationData, long: e.target.value })
+                        if (Number(e.target.value) || e.target.value === '') {
+                            setLocationData({ ...LocationData, long: e.target.value })
+                        }
                     }}
                         style={{ border: "1px solid black" }}
-                        value={LocationData.long} type="number" />
+                        value={LocationData.long} />
                 </Col>
             </Row>
             <Row gutter={24} style={{ marginTop: '20px', }}>
@@ -168,8 +173,10 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         value={LocationData.street} />
                 </Col>
                 <Col span={6}>
-                    <Input placeholder="Nömrə" type='number' onChange={(e) => {
-                        setLocationData({ ...LocationData, number: e.target.value })
+                    <Input placeholder="Nömrə" onChange={(e) => {
+                        if (Number(e.target.value) || e.target.value === '') {
+                            setLocationData({ ...LocationData, number: e.target.value })
+                        }
                     }}
                         style={{ border: "1px solid black" }}
                         value={LocationData.number} />

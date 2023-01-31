@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { AiFillEdit } from 'react-icons/ai'
 import { RiDeleteBin6Line } from 'react-icons/ri'
-import { Space, Table, Modal, Button, Input, Row, Col, Select, Form } from 'antd';
+import Highlighter from 'react-highlight-words';
+import { Space, Table, Modal, Button, Input } from 'antd';
 export default function LocationsTable({
     limit,
     total,
@@ -10,9 +11,102 @@ export default function LocationsTable({
     onLimitChange,
     onSkipChange
 }) {
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+    const searchInput = useRef(null);
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        setSearchText(selectedKeys[0]);
+        setSearchedColumn(dataIndex);
+    };
+    const handleReset = (clearFilters) => {
+        clearFilters();
+        setSearchText('');
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
+            >
+                <Input
+                    ref={searchInput}
+                    placeholder={`Axtar `}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Axtar
+                    </Button>
+                    <Button
+                        onClick={() => { clearFilters && handleReset(clearFilters) }}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Sil
+                    </Button>
+
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            close();
+                        }}
+                    >
+                        Bağla
+                    </Button>
+                </Space>
+            </div>
+        ),
+        // filterIcon: (filtered) => (
+        //     <SearchOutlined
+        //         style={{
+        //             color: filtered ? '#1890ff' : undefined,
+        //         }}
+        //     />
+        // ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        render: (text) =>
+            searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{
+                        backgroundColor: '#ffc069',
+                        padding: 0,
+                    }}
+                    searchWords={[searchText]}
+                    autoEscape
+                    textToHighlight={text ? text.toString() : ''}
+                />
+            ) : (
+                text
+            ),
+    });
     const columns = [
         {
-            title: 'Nömrəsi',
+            title: '#',
             dataIndex: 'locationId',
             key: 'locationId',
             render: (text, record, index) => (
@@ -25,26 +119,31 @@ export default function LocationsTable({
             title: 'Ünvan İD',
             dataIndex: 'locationId',
             key: 'locationId',
+            ...getColumnSearchProps('locationId'),
         },
         {
             title: 'Ünvan',
             dataIndex: 'name',
             key: 'name',
+            ...getColumnSearchProps('name'),
         },
         {
             title: 'Bölgə',
             dataIndex: 'stage',
             key: 'stage',
+            ...getColumnSearchProps('stege'),
         },
         {
             title: 'Lat',
             dataIndex: 'lat',
             key: 'lat',
+            ...getColumnSearchProps('lat'),
         },
         {
             title: 'Long ',
             dataIndex: 'long',
             key: 'long',
+            ...getColumnSearchProps('long'),
         },
         {
             title: 'Status',
