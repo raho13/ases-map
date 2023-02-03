@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Button, Modal, Input, Space } from "antd";
-export default function AddStage({ onAnyChange }) {
+export default function AddDistrict({ onAnyChange }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputValue, setinputValue] = useState({})
     const showModal = () => {
         setIsModalOpen(true);
     };
     const addToDb = () => {
-        Meteor.call("create_stage", inputValue, (err, res) => {
+        Meteor.call("create_district", inputValue, (err, res) => {
             if (err) {
                 console.log(err)
             }
             else if (res) {
-                onAnyChange("create_stage", {})
+                onAnyChange("create_district", {})
                 setIsModalOpen(false)
             }
 
@@ -25,7 +25,7 @@ export default function AddStage({ onAnyChange }) {
 
             <Button size='large' style={{ marginBottom: 20 }} type="primary" onClick={() => {
                 setIsModalOpen(true)
-            }} >Bölgə əlavə et  </Button>
+            }} >Rayon əlavə et  </Button>
 
             <Modal
                 title="Əlavə et"
@@ -38,7 +38,7 @@ export default function AddStage({ onAnyChange }) {
                 onCancel={() => {
                     setIsModalOpen(false)
                 }}>
-                <Input placeholder="Bölgə adı" onChange={(e) => {
+                <Input placeholder="Rayon adı" onChange={(e) => {
                     setinputValue({ ...inputValue, data: e.target.value })
                 }}
                     value={inputValue.data} />

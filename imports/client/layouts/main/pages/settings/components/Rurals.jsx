@@ -1,12 +1,15 @@
 import React from "react";
 import { Button, Modal, Input, Space } from "antd";
 import { MyTable2 } from "../../../components/Table2";
-import AddStage from "./AddStage";
+import AddRural from "./AddRural";
 import moment from 'moment'
 const unique = "bad_types.all";
 import { AiFillEdit } from 'react-icons/ai'
 const limit_ls_name = unique + "2.limit";
-export function Stages() {
+
+
+
+export function Rurals() {
     const [props, setProps] = React.useState({ ready: false, dataSource: [], total: 0 })
     const [query, setQuery] = React.useState({});
     const [sort, setSort] = React.useState({ createdAt: -1 })
@@ -15,6 +18,7 @@ export function Stages() {
     );
     const [modalIsopen, setmodalIsopen] = React.useState(false)
     const [inputValue, setinputValue] = React.useState({})
+    const [skip, setSkip] = React.useState(0);
     const columns = [
         {
             title: '#',
@@ -59,11 +63,11 @@ export function Stages() {
             )
         }
     ]
-    const [skip, setSkip] = React.useState(0);
+   
 
     function onAnyChange(whatChanged, { new_query = query, new_limit = limit, new_skip = skip, new_sort = sort }) {
         setProps({ ...props, ready: false })
-        Meteor.call("get_stages", new_query, new_limit, new_skip, new_sort, function (err, res) {
+        Meteor.call("get_rurals", new_query, new_limit, new_skip, new_sort, function (err, res) {
             if (res) {
                 res.ready = true
                 setProps(res)
@@ -96,8 +100,8 @@ export function Stages() {
         onAnyChange("init", { query, limit, skip, sort })
     }, [])
 
-    const editRegion = () => {
-        Meteor.call("update_stage", inputValue._id, inputValue, (err, res) => {
+    const editvillage = () => {
+        Meteor.call("update_rural", inputValue._id, inputValue, (err, res) => {
             if (res) {
                 setmodalIsopen(false)
                 onAnyChange("ok", {})
@@ -111,7 +115,7 @@ export function Stages() {
         <>
 
             <div className="w-full" >
-                <AddStage onAnyChange={onAnyChange} />
+                <AddRural onAnyChange={onAnyChange} />
                 <MyTable2
                     {...props}
                     columns={columns}
@@ -128,7 +132,7 @@ export function Stages() {
                     width={"40%"}
                     open={modalIsopen}
                     onOk={() => {
-                        editRegion()
+                        editvillage()
                     }}
                     okText="Tədbiq et"
                     cancelText="Ləğv et"
@@ -136,7 +140,7 @@ export function Stages() {
                     onCancel={() => {
                         setmodalIsopen(false)
                     }}>
-                    <Input placeholder="Bölgə adı" onChange={(e) => {
+                    <Input placeholder="Rayon adı" onChange={(e) => {
                         setinputValue({ ...inputValue, data: e.target.value })
                     }}
                         value={inputValue.data}

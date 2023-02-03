@@ -1,15 +1,12 @@
 import React from "react";
 import { Button, Modal, Input, Space } from "antd";
 import { MyTable2 } from "../../../components/Table2";
-import AddCity from "./AddCity";
+import AddVillage from "./AddVillage";
 import moment from 'moment'
 const unique = "bad_types.all";
 import { AiFillEdit } from 'react-icons/ai'
 const limit_ls_name = unique + "2.limit";
-
-
-
-export function Cities() {
+export function Villages() {
     const [props, setProps] = React.useState({ ready: false, dataSource: [], total: 0 })
     const [query, setQuery] = React.useState({});
     const [sort, setSort] = React.useState({ createdAt: -1 })
@@ -18,7 +15,6 @@ export function Cities() {
     );
     const [modalIsopen, setmodalIsopen] = React.useState(false)
     const [inputValue, setinputValue] = React.useState({})
-    const [skip, setSkip] = React.useState(0);
     const columns = [
         {
             title: '#',
@@ -63,11 +59,11 @@ export function Cities() {
             )
         }
     ]
-   
+    const [skip, setSkip] = React.useState(0);
 
     function onAnyChange(whatChanged, { new_query = query, new_limit = limit, new_skip = skip, new_sort = sort }) {
         setProps({ ...props, ready: false })
-        Meteor.call("get_cities", new_query, new_limit, new_skip, new_sort, function (err, res) {
+        Meteor.call("get_villages", new_query, new_limit, new_skip, new_sort, function (err, res) {
             if (res) {
                 res.ready = true
                 setProps(res)
@@ -101,7 +97,7 @@ export function Cities() {
     }, [])
 
     const editvillage = () => {
-        Meteor.call("update_city", inputValue._id, inputValue, (err, res) => {
+        Meteor.call("update_village", inputValue._id, inputValue, (err, res) => {
             if (res) {
                 setmodalIsopen(false)
                 onAnyChange("ok", {})
@@ -115,7 +111,7 @@ export function Cities() {
         <>
 
             <div className="w-full" >
-                <AddCity onAnyChange={onAnyChange} />
+                <AddVillage onAnyChange={onAnyChange} />
                 <MyTable2
                     {...props}
                     columns={columns}
@@ -140,7 +136,7 @@ export function Cities() {
                     onCancel={() => {
                         setmodalIsopen(false)
                     }}>
-                    <Input placeholder="Rayon adı" onChange={(e) => {
+                    <Input placeholder="Qəsəbə adı" onChange={(e) => {
                         setinputValue({ ...inputValue, data: e.target.value })
                     }}
                         value={inputValue.data}

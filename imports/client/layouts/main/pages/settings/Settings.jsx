@@ -1,13 +1,14 @@
 import { Menu, Table, Row, Col } from "antd"
 import React from "react"
-import { Regions } from "./components/Regions"
-import { Stages } from "./components/Stages"
+import { Villages } from "./components/Villages"
+import { Districts } from "./components/Districts"
 import { Cities } from "./components/Cities"
+import { Rurals } from "./components/Rurals"
 const MenuComonents = {
-    Regions, Stages, Cities
+    Villages, Districts, Cities, Rurals
 }
 export function Settings() {
-    const [choosen_item, setChoosenItem] = React.useState("Regions")
+    const [choosen_item, setChoosenItem] = React.useState("Villages")
     const MenuItem = MenuComonents[choosen_item]
     return <div className="flex flex-row">
         <Row>
@@ -21,16 +22,20 @@ export function Settings() {
                     mode="inline"
                     items={[
                         {
-                            key: "Regions",
-                            label: "Regionlar",
+                            key: "Villages",
+                            label: "Qəsəbələr",
                         },
                         {
-                            key: "Stages",
-                            label: "Bölgələr",
+                            key: "Districts",
+                            label: "Rayonlar",
                         },
                         {
                             key: "Cities",
                             label: "Şəhərlər",
+                        },
+                        {
+                            key: "Rurals",
+                            label: "Kəndlər",
                         },
 
                     ]}

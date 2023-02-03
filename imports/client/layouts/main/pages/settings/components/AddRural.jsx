@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Button, Modal, Input, Space } from "antd";
-export default function AddRegion({ onAnyChange }) {
+export default function AddRural({ onAnyChange }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputValue, setinputValue] = useState({})
     const showModal = () => {
         setIsModalOpen(true);
     };
     const addToDb = () => {
-        Meteor.call("create_region", inputValue, (err, res) => {
+        Meteor.call("create_rural", inputValue, (err, res) => {
             if (err) {
                 console.log(err)
             }
             else if (res) {
-                onAnyChange("create_region", {})
+                onAnyChange("create_rural", {})
                 setIsModalOpen(false)
             }
 
@@ -25,7 +25,7 @@ export default function AddRegion({ onAnyChange }) {
 
             <Button size='large' style={{ marginBottom: 20 }} type="primary" onClick={() => {
                 setIsModalOpen(true)
-            }} >Region əlavə et  </Button>
+            }} >Kənd əlavə et  </Button>
 
             <Modal
                 title="Əlavə et"
@@ -38,7 +38,7 @@ export default function AddRegion({ onAnyChange }) {
                 onCancel={() => {
                     setIsModalOpen(false)
                 }}>
-                <Input placeholder="Region adı" onChange={(e) => {
+                <Input placeholder="Kənd adı" onChange={(e) => {
                     setinputValue({ ...inputValue, data: e.target.value })
                 }}
                     value={inputValue.data} />

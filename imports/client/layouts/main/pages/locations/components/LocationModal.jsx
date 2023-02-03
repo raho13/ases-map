@@ -8,20 +8,21 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
     const [sort, setSort] = React.useState({ createdAt: -1 })
     const [limit, setLimit] = React.useState(0);
     const [skip, setSkip] = React.useState(0);
-    const [regions, setregions] = React.useState([])
-    const [stages, setstages] = React.useState([])
+    const [villages, setvillages] = React.useState([])
+    const [districts, setdistricts] = React.useState([])
     const [cities, setcities] = React.useState([])
+    const [rurals, setrurals] = React.useState([])
     useEffect(() => {
-        Meteor.call("get_regions", query, limit, skip, sort, function (err, res) {
+        Meteor.call("get_villages", query, limit, skip, sort, function (err, res) {
             if (res) {
-                setregions(res.dataSource)
+                setvillages(res.dataSource)
             } else {
                 console.log(err)
             }
         })
-        Meteor.call("get_stages", query, limit, skip, sort, function (err, res) {
+        Meteor.call("get_districts", query, limit, skip, sort, function (err, res) {
             if (res) {
-                setstages(res.dataSource)
+                setdistricts(res.dataSource)
             } else {
                 console.log(err)
             }
@@ -29,6 +30,13 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
         Meteor.call("get_cities", query, limit, skip, sort, function (err, res) {
             if (res) {
                 setcities(res.dataSource)
+            } else {
+                console.log(err)
+            }
+        })
+        Meteor.call("get_rurals", query, limit, skip, sort, function (err, res) {
+            if (res) {
+                setrurals(res.dataSource)
             } else {
                 console.log(err)
             }
@@ -135,36 +143,53 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                 <Col span={6}>
                     <Select
                         onChange={(e) => {
-                            setLocationData({ ...LocationData, stage: e })
+                            setLocationData({ ...LocationData, district: e })
                         }}
                         style={{
                             width: '100%',
                         }}
-                        value={LocationData.stage === "" ? 'Bölgə' : LocationData.stage} >
+                        value={LocationData.district === "" ? 'Rayon' : LocationData.district} >
 
-                        {stages.map((stage) => {
-                            return <Select.Option key={stage._id} value={stage.data}>{stage.data}</Select.Option>
+                        {districts.map((district) => {
+                            return <Select.Option key={district._id} value={district.data}>{district.data}</Select.Option>
                         })}
                     </Select>
                 </Col>
                 <Col span={6}>
                     <Select
                         onChange={(e) => {
-                            setLocationData({ ...LocationData, region: e })
+                            setLocationData({ ...LocationData, village: e })
                         }}
                         style={{
                             width: '100%',
                         }}
 
-                        value={LocationData.region === "" ? 'Region' : LocationData.region}
+                        value={LocationData.village === "" ? 'Qəsəbə' : LocationData.village}
                     >
-                        {regions.map((region) => {
-                            return <Select.Option key={region._id} value={region.data}>{region.data}</Select.Option>
+                        {villages.map((village) => {
+                            return <Select.Option key={village._id} value={village.data}>{village.data}</Select.Option>
                         })}
                     </Select>
                 </Col>
             </Row>
             <Row gutter={24} style={{ marginTop: '20px' }}>
+                <Col span={6}>
+                    <Select
+                        onChange={(e) => {
+                            setLocationData({ ...LocationData, rural: e })
+                        }}
+
+                        style={{
+                            width: '100%',
+                        }}
+                        value={LocationData.rural === "" ? 'Kənd' : LocationData.rural}
+                    >
+                        {rurals.map((rural) => {
+                            return <Select.Option key={rural._id} value={rural.data}>{rural.data}</Select.Option>
+                        })}
+
+                    </Select>
+                </Col>
                 <Col span={6}>
                     <Input placeholder="Küçə/prospekt" onChange={(e) => {
                         setLocationData({ ...LocationData, street: e.target.value })
@@ -173,26 +198,33 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         value={LocationData.street} />
                 </Col>
                 <Col span={6}>
-                    <Input placeholder="Nömrə" onChange={(e) => {
+                    <Input placeholder="Küçə nömrəsi" onChange={(e) => {
                         if (Number(e.target.value) || e.target.value === '') {
-                            setLocationData({ ...LocationData, number: e.target.value })
+                            setLocationData({ ...LocationData, streetnumber: e.target.value })
                         }
                     }}
                         style={{ border: "1px solid black" }}
-                        value={LocationData.number} />
+                        value={LocationData.streetnumber} />
                 </Col>
+                <Col span={6}>
+                    <Input placeholder="Yolun istiqaməti" onChange={(e) => {
+                        setLocationData({ ...LocationData, direction: e.target.value })
+                    }}
+                        style={{ border: "1px solid black" }}
+                        value={LocationData.direction} />
+                </Col>
+            </Row>
+            <Row gutter={24} style={{ marginTop: '20px' }}>
                 <Col span={6}>
                     <Input placeholder="İd" disabled value={LocationData._id} style={{ border: "1px solid black" }} />
                 </Col>
                 <Col span={6}>
-                    <Input placeholder="Məhşur adı" onChange={(e) => {
-                        setLocationData({ ...LocationData, famous_name: e.target.value })
+                    <Input placeholder="Label" onChange={(e) => {
+                        setLocationData({ ...LocationData, locationlabel: e.target.value })
                     }}
                         style={{ border: "1px solid black" }}
-                        value={LocationData.famous_name} />
+                        value={LocationData.locationlabel} />
                 </Col>
-            </Row>
-            <Row gutter={24} style={{ marginTop: '20px' }}>
                 <Col span={6}>
                     <Select
                         onChange={(e) => {

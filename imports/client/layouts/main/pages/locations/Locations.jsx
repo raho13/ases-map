@@ -22,12 +22,14 @@ export default function Locations() {
         long: "",
         country: "",
         city: "",
-        stage: "",
-        region: "",
+        rural: "",
+        district: "",
+        village: "",
         street: "",
-        number: "",
+        streetnumber: "",
         id: "",
-        famous_name: "",
+        locationlabel: "",
+        direction: "",
         status: true,
         locationId: "",
     })
@@ -76,17 +78,20 @@ export default function Locations() {
         setSkip(skip)
     }
     function onQueryChange(new_query) {
-        if (new_query.status === undefined) {
+        if (new_query.status === undefined || new_query.status === null) {
             setQuery({
                 $or: [
                     { name: new RegExp(new_query.name) },
                     { shortname: new RegExp(new_query.name) },
                     { city: new RegExp(new_query.name) },
-                    { stage: new RegExp(new_query.name) },
+                    { district: new RegExp(new_query.name) },
                     { country: new RegExp(new_query.name) },
-                    { region: new RegExp(new_query.name) },
+                    { village: new RegExp(new_query.name) },
                     { street: new RegExp(new_query.name) },
-                    { famous_name: new RegExp(new_query.name) },
+                    { rural: new RegExp(new_query.name) },
+                    { locationlabel: new RegExp(new_query.name) },
+                    { streetnumber: new RegExp(new_query.name) },
+                    { direction: new RegExp(new_query.name) },
                 ]
             })
         } else {
@@ -95,11 +100,14 @@ export default function Locations() {
                     { name: new RegExp(new_query.name) },
                     { shortname: new RegExp(new_query.name) },
                     { city: new RegExp(new_query.name) },
-                    { stage: new RegExp(new_query.name) },
+                    { district: new RegExp(new_query.name) },
                     { country: new RegExp(new_query.name) },
-                    { region: new RegExp(new_query.name) },
+                    { village: new RegExp(new_query.name) },
                     { street: new RegExp(new_query.name) },
-                    { famous_name: new RegExp(new_query.name) },
+                    { rural: new RegExp(new_query.name) },
+                    { locationlabel: new RegExp(new_query.name) },
+                    { streetnumber: new RegExp(new_query.name) },
+                    { direction: new RegExp(new_query.name) },
                 ]
             })
         }

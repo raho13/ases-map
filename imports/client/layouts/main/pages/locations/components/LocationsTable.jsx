@@ -54,7 +54,12 @@ export default function LocationsTable({
                         Axtar
                     </Button>
                     <Button
-                        onClick={() => { clearFilters && handleReset(clearFilters) }}
+                        onClick={() => {
+                            clearFilters
+                            handleReset(clearFilters)
+                            handleSearch(selectedKeys, confirm, dataIndex)
+                        }
+                        }
                         size="small"
                         style={{
                             width: 90,
@@ -75,13 +80,7 @@ export default function LocationsTable({
                 </Space>
             </div>
         ),
-        // filterIcon: (filtered) => (
-        //     <SearchOutlined
-        //         style={{
-        //             color: filtered ? '#1890ff' : undefined,
-        //         }}
-        //     />
-        // ),
+
         onFilter: (value, record) =>
             record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownOpenChange: (visible) => {
@@ -128,10 +127,10 @@ export default function LocationsTable({
             ...getColumnSearchProps('name'),
         },
         {
-            title: 'Bölgə',
-            dataIndex: 'stage',
-            key: 'stage',
-            ...getColumnSearchProps('stege'),
+            title: 'Şəhər',
+            dataIndex: 'city',
+            key: 'city',
+            ...getColumnSearchProps('city'),
         },
         {
             title: 'Lat',
