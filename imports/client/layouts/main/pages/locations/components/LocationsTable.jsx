@@ -139,10 +139,10 @@ export default function LocationsTable({
             ...getColumnSearchProps('lat'),
         },
         {
-            title: 'Long ',
-            dataIndex: 'long',
-            key: 'long',
-            ...getColumnSearchProps('long'),
+            title: 'Lon ',
+            dataIndex: 'lon',
+            key: 'lon',
+            ...getColumnSearchProps('lon'),
         },
         {
             title: 'Status',

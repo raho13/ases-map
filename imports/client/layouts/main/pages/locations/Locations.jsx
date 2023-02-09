@@ -19,7 +19,7 @@ export default function Locations() {
         name: "",
         shortname: "",
         lat: "",
-        long: "",
+        lon: "",
         country: "",
         city: "",
         rural: "",
@@ -36,6 +36,8 @@ export default function Locations() {
     const [resetData, setResetData] = useState(LocationData)
     //Get
     const data = useTracker(() => {
+      
+
         const result = {}
         result.ready = Meteor.subscribe('get_locations', query, limit, skip, sort).ready()
         result.locations = LocationsCollection.find(
@@ -43,6 +45,16 @@ export default function Locations() {
         ).fetch()
         return result;
     }, [limit, skip, query, sort])
+
+    // useEffect(()=>{
+      
+    //     fetch('https://opensheet.elk.sh/1GX1jcQBoDhByuRppuxfhfV_nfKFkL33r9wDcr0qqarM/main')
+    //     .then((response) => response.json())
+    //     .then((data) => {Meteor.call('addTons',data,(err,res)=>{
+    //         if(err)console.log(err)
+    //         else if(res) console.log(res)
+    //     })})
+    // },[])
 
     useEffect(() => {
         Meteor.call('count_locations', query, function (err, res) {
@@ -78,6 +90,7 @@ export default function Locations() {
         setSkip(skip)
     }
     function onQueryChange(new_query) {
+        console.log(new_query.name)
         if (new_query.status === undefined || new_query.status === null) {
             setQuery({
                 $or: [

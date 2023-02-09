@@ -95,13 +95,13 @@ const LocationModal = ({ resetData, setIsModalOpen, LocationData, setLocationDat
                         value={LocationData.lat} />
                 </Col>
                 <Col span={6}>
-                    <Input placeholder="Long" onChange={(e) => {
+                    <Input placeholder="Lonn" onChange={(e) => {
                         if (Number(e.target.value) || e.target.value === '') {
-                            setLocationData({ ...LocationData, long: e.target.value })
+                            setLocationData({ ...LocationData, lon: e.target.value })
                         }
                     }}
                         style={{ border: "1px solid black" }}
-                        value={LocationData.long} />
+                        value={LocationData.lon} />
                 </Col>
             </Row>
             <Row gutter={24} style={{ marginTop: '20px', }}>
